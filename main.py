@@ -6,10 +6,13 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.chrome.options import Options
 
 import cv2
+# import matplotlib.pyplot as plt
+
 import base64
 import re
 import uuid
 import os
+from datetime import datetime, timedelta
 import sys
 
 def decode_image(src):
@@ -93,9 +96,9 @@ if __name__ == '__main__':
     password = env_dist.get('PASSWORD')
     reserve_time = sys.argv[1]
     weekday = sys.argv[2]
-    
-    print(username)
-    print(password)
+    # username = '18307110276'
+    # password = 'chen7514TS25578600'
+    # reserve_time = '8'
 
     # 调用webdriver包的Chrome类，返回chrome浏览器对象
     chrome_options = Options()
@@ -103,9 +106,11 @@ if __name__ == '__main__':
     chrome_options.add_argument('--no-sandbox')
     chrome_options.add_argument('--disable-dev-shm-usage')
     browser = webdriver.Chrome('/usr/bin/chromedriver', options=chrome_options)
+    # browser = webdriver.Chrome()
 
     # 正大标场
     browser.get("https://elife.fudan.edu.cn/public/front/loadOrderForm_ordinary2.htm?type=resource&serviceContent.id=2c9c486e4f821a19014f82418a900004")
+    # browser.maximize_window()
 
     browser.find_element(By.CLASS_NAME, 'xndl').click()
     browser.find_element(By.NAME, 'username').send_keys(username)
@@ -114,9 +119,14 @@ if __name__ == '__main__':
 
     # 星期几
     browser.switch_to.frame(0)
-    browser.find_element(By.ID, 'one' + weekday).click()
+    weekday = (datetime.now()+timedelta(days=3)).weekday()
+    browser.find_element(By.ID, 'one' + str(weekday+1)).click()
 
-    block = browser.find_element(By.XPATH, "//font[text()='" + reserve_time + "']/../..")
+    try:
+        block = browser.find_element(By.XPATH, "//font[text()='" + reserve_time + "']/../..")
+    except:
+        print("没有找到这个时间的场")
+        sys.exit(0)
     
     block.find_element(By.TAG_NAME, 'img').click()
     browser.find_element(By.ID, 'verify_button').click()
