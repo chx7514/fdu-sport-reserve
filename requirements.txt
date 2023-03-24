@@ -1,2 +1,2 @@
 selenium
-cv2
+opencv-python
