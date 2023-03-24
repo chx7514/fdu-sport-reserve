@@ -96,8 +96,7 @@ if __name__ == '__main__':
     password = env_dist.get('PASSWORD')
     reserve_time = sys.argv[1]
     weekday = sys.argv[2]
-    # username = '18307110276'
-    # password = 'chen7514TS25578600'
+
     # reserve_time = '8'
 
     # 调用webdriver包的Chrome类，返回chrome浏览器对象
