@@ -49,7 +49,7 @@ jobs:
             && sudo chmod +x /usr/local/bin/chromedriver \
             && chromedriver --version
 
-      - name: 'fdu sports Reverse' # 把这个放在前面 是因为后面的那个代码 可能会报错
+      - name: 'fdu sports Reverse'
         env:
           PASSWORD: ${{ secrets.PASSWORD }}
           USER_ID: ${{ secrets.USER_ID }}
