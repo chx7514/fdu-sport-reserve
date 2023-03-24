@@ -53,4 +53,4 @@ jobs:
         env:
           PASSWORD: ${{ secrets.PASSWORD }}
           USER_ID: ${{ secrets.USER_ID }}
-        run: python ./api/get_163_mv_vercel/get-new-url/main_local.py
+        run: python ./main.py 8 6
