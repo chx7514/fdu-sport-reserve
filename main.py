@@ -6,8 +6,6 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.chrome.options import Options
 
 import cv2
-import matplotlib.pyplot as plt
-
 import base64
 import re
 import uuid
