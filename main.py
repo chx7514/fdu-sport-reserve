@@ -106,7 +106,6 @@ if __name__ == '__main__':
 
     # 正大标场
     browser.get("https://elife.fudan.edu.cn/public/front/loadOrderForm_ordinary2.htm?type=resource&serviceContent.id=2c9c486e4f821a19014f82418a900004")
-    browser.maximize_window()
 
     browser.find_element(By.CLASS_NAME, 'xndl').click()
     browser.find_element(By.NAME, 'username').send_keys(username)
