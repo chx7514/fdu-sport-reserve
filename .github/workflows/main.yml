@@ -53,4 +53,4 @@ jobs:
         env:
           PASSWORD: ${{ secrets.PASSWORD }}
           USER_ID: ${{ secrets.USER_ID }}
-        run: python ./main.py 8 6
+        run: python ./main.py
