@@ -98,12 +98,11 @@ if __name__ == '__main__':
     print(password)
 
     # 调用webdriver包的Chrome类，返回chrome浏览器对象
-#     chrome_options = Options()
-#     chrome_options.add_argument('--headless')
-#     chrome_options.add_argument('--no-sandbox')
-#     chrome_options.add_argument('--disable-dev-shm-usage')
-#     browser = webdriver.Chrome('/usr/bin/chromedriver', options=chrome_options)
-    browser = webdriver.Chrome('/usr/bin/chromedriver')
+    chrome_options = Options()
+    chrome_options.add_argument('--headless')
+    chrome_options.add_argument('--no-sandbox')
+    chrome_options.add_argument('--disable-dev-shm-usage')
+    browser = webdriver.Chrome('/usr/bin/chromedriver', options=chrome_options)
 
     # 正大标场
     browser.get("https://elife.fudan.edu.cn/public/front/loadOrderForm_ordinary2.htm?type=resource&serviceContent.id=2c9c486e4f821a19014f82418a900004")
