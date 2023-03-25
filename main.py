@@ -94,7 +94,6 @@ if __name__ == '__main__':
 
     username = env_dist.get('USER_ID')
     password = env_dist.get('PASSWORD')
-    reserve_time = '8'
 
     # 调用webdriver包的Chrome类，返回chrome浏览器对象
     chrome_options = Options()
@@ -102,10 +101,11 @@ if __name__ == '__main__':
     chrome_options.add_argument('--no-sandbox')
     chrome_options.add_argument('--disable-dev-shm-usage')
     browser = webdriver.Chrome('/usr/bin/chromedriver', options=chrome_options)
-    # browser = webdriver.Chrome()
+    browser = webdriver.Chrome()
 
     # 正大标场
     browser.get("https://elife.fudan.edu.cn/public/front/loadOrderForm_ordinary2.htm?type=resource&serviceContent.id=2c9c486e4f821a19014f82418a900004")
+    # browser.get("https://elife.fudan.edu.cn/public/front/loadOrderForm_ordinary2.htm?type=resource&serviceContent.id=8aecc6ce749544fd01749a31a04332c2")
     # browser.maximize_window()
 
     browser.find_element(By.CLASS_NAME, 'xndl').click()
@@ -115,27 +115,40 @@ if __name__ == '__main__':
 
     # 星期几
     browser.switch_to.frame(0)
-    weekday = (datetime.now()+timedelta(days=3)).weekday()
-    browser.find_element(By.ID, 'one' + str(weekday+1)).click()
+    reserve_day = datetime.now() + timedelta(days=2)
+    weekday = reserve_day.weekday()
+
+    browser.execute_script("javascript:goToDate('" + reserve_day.strftime("%Y-%m-%d") + "');")
 
     try:
-        block = browser.find_element(By.XPATH, "//font[text()='" + reserve_time + "']/../..")
+        blocks = browser.find_elements(By.XPATH, "//font[contains(text(),':00')]/../..")
     except:
-        print("没有找到这个时间的场")
+        print("当天无可预约场馆")
         sys.exit(0)
-    
-    block.find_element(By.TAG_NAME, 'img').click()
-    browser.find_element(By.ID, 'verify_button').click()
 
-    error = True
-    while error:
-        try:
-            pass_captcha()
-            browser.implicitly_wait(1)
-            browser.find_element(By.ID, 'btn_sub').click()
-            error = False
-            print("预约成功")
+    flag = True
+    for block in blocks[::-1]:
+        try:    
+            block.find_element(By.TAG_NAME, 'img').click()
+            browser.find_element(By.ID, 'verify_button').click()
         except:
-            print("识别失败，重新识别")
+            continue     
+        
+        flag = False
+        error = True
+        while error:
+            try:
+                pass_captcha()
+                browser.implicitly_wait(1)
+                browser.find_element(By.ID, 'btn_sub').click()
+                error = False
+                print("预约成功")
+            except:
+                print("识别失败，重新识别")
+                browser.find_element(By.CLASS_NAME, 're-btn').click()
+        break
+
+    if flag:
+        print("当天无可预约场馆")
 
     browser.quit()
