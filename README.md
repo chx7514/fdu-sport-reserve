@@ -1,3 +1,1 @@
-在 secret 中添加自己的学号 USER_ID 和密码 PASSWORD
-
-在 main.py 中修改时间 reserve_time
+[tutorial](https://chx7514.github.io/2023/03/31/%E6%8A%A2%E5%9C%BA%E8%84%9A%E6%9C%AC%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95/)
