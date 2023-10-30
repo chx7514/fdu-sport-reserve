@@ -125,7 +125,7 @@ def pass_block_captcha(browser):
 if __name__ == '__main__':
     # print(os.path.abspath(__file__))
     # 调用webdriver包的Edge类，返回edge浏览器对象
-    user_data_dir = r'C:\Users\Tina_\AppData\Local\Microsoft\Edge\User Data'
+    # user_data_dir
     edge_options = Options()
     # edge_options.add_argument('--headless')
     # edge_options.add_argument('--no-sandbox')
